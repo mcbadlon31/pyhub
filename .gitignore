@@ -12,3 +12,6 @@ node_modules/
 
 # Logs
 *.log
+
+# Claude Code local settings (not shared)
+.claude/settings.local.json

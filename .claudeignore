@@ -1,0 +1,15 @@
+# OS files
+.DS_Store
+
+# Git internals
+.git/
+
+# Editor configs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dataset binaries (when generated)
+datasets/*.extxyz
