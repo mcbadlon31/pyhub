@@ -406,7 +406,7 @@ print(f"Symmetric difference: {unique_to_each}")`,
     //  DICTIONARIES
     // ════════════════════════════════════════════════════════
     {
-      id:   'dictionaries',
+      id:   'dicts',
       name: 'Dictionaries',
       desc: 'Mapping molecule names to properties, storing parsed output data, and building result records',
 

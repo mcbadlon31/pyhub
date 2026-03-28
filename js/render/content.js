@@ -4,7 +4,7 @@
  * They do NOT read from state directly.
  */
 
-import { esc, tagColors } from '../utils.js';
+import { esc, tagColors, normAnswer } from '../utils.js';
 import { isDone } from '../progress.js';
 
 /** Render the topic title, breadcrumb, and Mark Done button. */
@@ -159,7 +159,7 @@ function _exerciseCard(ex, idx) {
       <div class="ex-type" style="color:${color}">${label}</div>
       <div class="ex-q">${ex.q}</div>
       <div class="challenge-area">
-        <div class="challenge-hint">💡 ${esc(ex.hint)}</div>
+        ${ex.hint ? `<div class="challenge-hint">💡 ${esc(ex.hint)}</div>` : ''}
         <textarea class="challenge-textarea"
           placeholder="# Write your solution here…"
           spellcheck="false"
@@ -208,11 +208,12 @@ function _bindExerciseHandlers(topic) {
       const correct = parseInt(btn.dataset.correct, 10);
       const opts    = document.querySelectorAll(`#mcq-${exIdx} .mcq-opt`);
       const fb      = document.getElementById(`fb-${exIdx}`);
-      const ex      = topic.exercises[exIdx];
+      const ex      = topic.exercises?.[exIdx];
+      if (!ex || !opts.length || !fb) return;
 
       opts.forEach(o => o.classList.add('disabled'));
-      opts[optIdx].classList.add(optIdx === correct ? 'correct' : 'wrong');
-      if (optIdx !== correct) opts[correct].classList.add('correct');
+      opts[optIdx]?.classList.add(optIdx === correct ? 'correct' : 'wrong');
+      if (optIdx !== correct && opts[correct]) opts[correct].classList.add('correct');
 
       const ok  = optIdx === correct;
       fb.textContent = ok ? `✓ ${ex.feedback}` : `✗ Incorrect. ${ex.feedback}`;
@@ -245,7 +246,6 @@ function _checkFill(exIdx) {
   const fb    = document.getElementById(`fb-${exIdx}`);
   if (!input || !fb) return;
 
-  const { normAnswer } = { normAnswer: s => String(s).toLowerCase().replace(/[\s.…]+/g, '') };
   const userAns = normAnswer(input.value);
   const correct = normAnswer(input.dataset.answer);
   const ok = userAns === correct;

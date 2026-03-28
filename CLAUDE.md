@@ -63,7 +63,7 @@ All stage IDs use prefixed kebab format: {track}-s{n}
 All topic IDs are globally unique kebab-case. No two topics across any file share an ID.
 Current IDs in use (do not reuse):
   variables, operators, strings, conditionals, loops,
-  functions, lists, tuples-sets, dictionaries, file-io, error-handling,
+  functions, lists, tuples-sets, dicts, file-io, error-handling,
   comprehensions, oop, modules, args-kwargs, lambda-map-filter, decorators, generators,
   stdlib-scipy, venv-pip-jupyter, numpy, pandas, matplotlib, cli-tools,
   type-hints, async, testing, packaging, design-patterns,

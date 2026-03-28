@@ -1,23 +1,29 @@
 #!/bin/bash
 # Hook: auto-validate data file schema after Edit/Write
-# Fires on PostToolUse for Edit|Write — checks if the edited file is a data file
-# and runs schema validation if so.
+# Fires on PostToolUse for Edit|Write
+# Reads tool_input JSON from stdin, checks if edited file is a data/*.js file,
+# and runs Node-based schema validation if so.
 
 INPUT=$(cat)
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+
+# Extract file_path from JSON without jq (portable)
+FILE_PATH=$(echo "$INPUT" | grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"file_path"[[:space:]]*:[[:space:]]*"//;s/"$//')
 
 # Only validate data/ JS files
-if [[ "$FILE_PATH" != *"data/"* ]] || [[ "$FILE_PATH" != *".js" ]]; then
+if [[ -z "$FILE_PATH" ]]; then
+  exit 0
+fi
+case "$FILE_PATH" in
+  *data/*.js) ;;  # match — continue
+  *) exit 0 ;;    # not a data file — skip
+esac
+
+# Check file exists
+if [[ ! -f "$FILE_PATH" ]]; then
   exit 0
 fi
 
-# Extract the global variable name from the file (e.g., PY_S1, ML_S6)
-VAR_NAME=$(grep -oP 'window\.\K[A-Z_]+\d' "$FILE_PATH" 2>/dev/null | head -1)
-if [[ -z "$VAR_NAME" ]]; then
-  exit 0
-fi
-
-# Run schema validation
+# Run schema validation via Node
 RESULT=$(node -e "
 const fs = require('fs');
 const window = {};
@@ -27,18 +33,21 @@ try {
   console.error('SYNTAX ERROR: ' + e.message);
   process.exit(1);
 }
-const stage = window.$VAR_NAME;
-if (!stage || !stage.topics) { console.log('No topics found'); process.exit(0); }
+const varName = Object.keys(window).find(k => /^(PY|CS|ML)_S\d+$/.test(k));
+if (!varName) { process.exit(0); }
+const stage = window[varName];
+if (!stage || !Array.isArray(stage.topics) || stage.topics.length === 0) { process.exit(0); }
 const required = ['id','name','desc','explanation','code','cheatsheet','exercises','resources'];
 let errors = 0;
 for (const t of stage.topics) {
   for (const f of required) {
-    if (!t[f]) { console.error('MISSING: ' + t.id + ' → ' + f); errors++; }
+    if (t[f] === undefined || t[f] === null) { console.error('MISSING: ' + t.id + ' -> ' + f); errors++; }
   }
+  if (!Array.isArray(t.exercises)) { console.error(t.id + ': exercises is not an array'); errors++; continue; }
   const types = t.exercises.map(e => e.type);
-  if (types.filter(x => x === 'mcq').length < 1) { console.error(t.id + ': needs ≥1 mcq'); errors++; }
-  if (types.filter(x => x === 'fill').length < 1) { console.error(t.id + ': needs ≥1 fill'); errors++; }
-  if (types.filter(x => x === 'challenge').length < 1) { console.error(t.id + ': needs ≥1 challenge'); errors++; }
+  if (types.filter(x => x === 'mcq').length < 1) { console.error(t.id + ': needs >= 1 mcq'); errors++; }
+  if (types.filter(x => x === 'fill').length < 1) { console.error(t.id + ': needs >= 1 fill'); errors++; }
+  if (types.filter(x => x === 'challenge').length < 1) { console.error(t.id + ': needs >= 1 challenge'); errors++; }
 }
 if (errors === 0) console.log('Schema valid: ' + stage.topics.length + ' topics in ' + stage.id);
 else { console.error(errors + ' schema error(s)'); process.exit(1); }
