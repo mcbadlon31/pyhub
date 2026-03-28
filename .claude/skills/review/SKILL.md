@@ -19,9 +19,11 @@ Run a multi-expert review on a completed data file before committing.
 |-------|---------------|
 | Python (`data/python/`) | compchem-expert, cs-expert, pedagogy-expert |
 | CS (`data/cs/`) | cs-expert, math-expert, pedagogy-expert |
-| ML 1-4 (`data/ml/01-04`) | cs-expert, math-expert, compchem-expert, pedagogy-expert |
-| ML 5 (`data/ml/05`) | compchem-expert, quantum-expert, cs-expert, pedagogy-expert |
-| ML 6 (`data/ml/06`) | compchem-expert, quantum-expert, cs-expert, math-expert, pedagogy-expert |
+| ML 1–2 (`data/ml/01-02`) | cs-expert, math-expert, library-api-expert, pedagogy-expert |
+| ML 3 (`data/ml/03`) | cs-expert, math-expert, library-api-expert, compchem-expert, pedagogy-expert |
+| ML 4 (`data/ml/04`) | cs-expert, math-expert, pytorch-expert, pedagogy-expert |
+| ML 5 (`data/ml/05`) | compchem-expert, quantum-expert, cs-expert, molecular-modeling-expert, pytorch-expert, pedagogy-expert |
+| ML 6 (`data/ml/06`) | compchem-expert, quantum-expert, cs-expert, molecular-modeling-expert, geometric-dl-expert, pytorch-expert, pedagogy-expert |
 
 3. **Launch all relevant experts in parallel** using the Agent tool. Each agent receives:
    - The file path to review
