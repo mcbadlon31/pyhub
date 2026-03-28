@@ -1,0 +1,18 @@
+/* ═══════════════════════════════════════════════════════
+   PyHub — themes.css
+   Track-specific accent color overrides.
+   Applied via [data-track] attribute on <html>.
+   ═══════════════════════════════════════════════════════ */
+
+/* Python track → green */
+[data-track="python"] { --track-accent: var(--green); }
+
+/* CS Fundamentals → teal */
+[data-track="cs"] { --track-accent: var(--teal); }
+
+/* Machine Learning → pink (Stages 1-4), lime (Stage 5), cyan (Stage 6) */
+[data-track="ml"] { --track-accent: var(--pink); }
+
+/* Stage-specific color map (used by JS to set sg-dot and sg-prog-fill colors) */
+/* Colors referenced by name in data files via the 'color' field: */
+/*   green, blue, purple, orange, red, teal, pink, cyan, lime          */

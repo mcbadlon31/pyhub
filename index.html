@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-track="python">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PyHub — Python for Computational Chemistry</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <div id="logo">Py<span>Hub</span></div>
+
+  <div class="track-tabs" role="tablist" aria-label="Learning track">
+    <button class="track-tab active" role="tab" aria-selected="true"
+      data-track="python" id="tab-python">🐍 Python</button>
+    <button class="track-tab" role="tab" aria-selected="false"
+      data-track="cs" id="tab-cs">🧮 CS Fundamentals</button>
+    <button class="track-tab" role="tab" aria-selected="false"
+      data-track="ml" id="tab-ml">🤖 Machine Learning</button>
+  </div>
+
+  <div class="mode-tabs" role="tablist" aria-label="View mode">
+    <button class="mode-tab active" role="tab" aria-selected="true"
+      data-mode="reference">Reference</button>
+    <button class="mode-tab" role="tab" aria-selected="false"
+      data-mode="study">Study</button>
+    <button class="mode-tab" role="tab" aria-selected="false"
+      data-mode="cheatsheet">Cheatsheet</button>
+    <button class="mode-tab" role="tab" aria-selected="false"
+      data-mode="exercises">Exercises</button>
+  </div>
+
+  <div id="overall-progress" aria-label="Overall progress">
+    <span id="overall-pct">0%</span>
+    <div id="overall-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      <div id="overall-fill"></div>
+    </div>
+    <span id="overall-count">0/0 done</span>
+  </div>
+
+  <button id="ai-toggle" aria-label="Open AI Explainer panel">✦ AI Explainer</button>
+</div>
+
+<!-- BODY -->
+<div id="body">
+
+  <!-- SIDEBAR -->
+  <nav id="sidebar" aria-label="Topics"></nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="main">
+    <div id="welcome" aria-label="Welcome screen"></div>
+
+    <div id="topic-content" hidden>
+      <div id="topic-header">
+        <div class="breadcrumb" id="breadcrumb" aria-label="Breadcrumb"></div>
+        <div class="topic-title-row">
+          <h1 id="topic-title"></h1>
+          <button id="mark-done-btn" class="undone" aria-pressed="false">
+            Mark Done
+          </button>
+        </div>
+      </div>
+
+      <div id="content-area"></div>
+
+      <div id="topic-nav">
+        <button class="nav-btn" id="prev-btn" aria-label="Previous topic">← Prev</button>
+        <button class="nav-btn" id="next-btn" aria-label="Next topic">Next →</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- AI PANEL -->
+  <aside id="ai-panel" aria-label="AI Explainer" aria-hidden="true">
+    <div id="ai-panel-header">
+      <div id="ai-panel-title">✦ <span>AI</span> Explainer</div>
+      <button id="ai-close" aria-label="Close AI panel">✕</button>
+    </div>
+    <div id="ai-body">
+      <div>
+        <div class="ai-label">Quick actions — current topic</div>
+        <div class="ai-quick-btns" id="ai-quick-btns">
+          <button class="ai-quick-btn" data-action="example">Generate example</button>
+          <button class="ai-quick-btn" data-action="explain">Explain topic</button>
+          <button class="ai-quick-btn" data-action="quiz">Give me a quiz</button>
+          <button class="ai-quick-btn" data-action="pitfalls">Common pitfalls</button>
+        </div>
+      </div>
+      <div>
+        <div class="ai-label">Paste code to explain</div>
+        <textarea id="ai-code-input"
+          placeholder="# Paste any Python code here...&#10;# Claude will explain it with chemistry context."
+          aria-label="Code input for AI explanation"></textarea>
+      </div>
+      <button id="ai-explain-btn">Explain This Code</button>
+      <div id="ai-response" aria-live="polite" aria-label="AI response"></div>
+      <div class="ai-key-section">
+        <div class="ai-label">API Key (standalone use only)</div>
+        <input type="password" id="ai-key-input"
+          placeholder="sk-ant-..."
+          aria-label="Anthropic API key for standalone use">
+        <p class="ai-key-note">
+          Leave blank inside Claude.ai — works automatically.
+          Add your key to use this file offline.
+        </p>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- /#body -->
+
+<!-- DATA — load order matters: data files before app modules -->
+<script src="data/python/01-foundations.js"></script>
+<script src="data/python/02-core.js"></script>
+<script src="data/python/03-intermediate.js"></script>
+<script src="data/python/04-ecosystem.js"></script>
+<script src="data/python/05-advanced.js"></script>
+<script src="data/cs/01-data-structures.js"></script>
+<script src="data/cs/02-algorithms.js"></script>
+<script src="data/ml/01-math-foundations.js"></script>
+<script src="data/ml/02-data-prep.js"></script>
+<script src="data/ml/03-classical-ml.js"></script>
+<script src="data/ml/04-deep-learning.js"></script>
+<script src="data/ml/05-molecular-ml.js"></script>
+<script src="data/ml/06-atomistic-ml.js"></script>
+
+<!-- APP — ES6 modules -->
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

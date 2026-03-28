@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# No node_modules — this project has no npm dependencies
+node_modules/
+
+# Logs
+*.log
