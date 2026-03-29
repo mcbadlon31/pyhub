@@ -2,14 +2,14 @@
  * render/welcome.js — Welcome screen rendering.
  */
 
-import { stagesForTrack, ALL_TOPICS } from '../data.js';
+import { stagesForTrack, topicsForTrack } from '../data.js';
 import { allProgress } from '../progress.js';
 import { colorVar } from '../utils.js';
 
 const TRACKS = [
-  { key: 'python', icon: '🐍', title: 'Python',           desc: '22 topics · foundations to advanced' },
-  { key: 'cs',     icon: '🧮', title: 'CS Fundamentals',  desc: '15 topics · data structures & algorithms' },
-  { key: 'ml',     icon: '🤖', title: 'Machine Learning', desc: '35 topics · classical ML to atomistic AI' },
+  { key: 'python', icon: '🐍', title: 'Python',           suffix: 'foundations to advanced' },
+  { key: 'cs',     icon: '🧮', title: 'CS Fundamentals',  suffix: 'data structures & algorithms' },
+  { key: 'ml',     icon: '🤖', title: 'Machine Learning', suffix: 'classical ML to atomistic AI' },
 ];
 
 /** Render the welcome screen with track cards. */
@@ -30,7 +30,7 @@ export function renderWelcome() {
               aria-label="Open ${tr.title} track">
       <div class="wtc-icon">${tr.icon}</div>
       <div class="wtc-title">${tr.title}</div>
-      <div class="wtc-desc">${tr.desc} · ${pct}% done</div>
+      <div class="wtc-desc">${total} topics · ${tr.suffix} · ${pct}% done</div>
       <div class="wtc-bar" style="background:${accent};width:${pct || 4}px;min-width:4px"></div>
     </div>`;
   }).join('');

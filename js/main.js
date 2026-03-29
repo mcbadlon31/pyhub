@@ -5,11 +5,10 @@
 
 import { migrate }               from './progress.js';
 import { validateSchema }        from './data.js';
-import { setTrack, setMode,
+import { initRouter, setTrack, setMode,
          selectTopic, markDone,
-         navTopic }              from './router.js';
+         navTopic, goHome }      from './router.js';
 import { renderSidebar }         from './render/sidebar.js';
-import { renderWelcome }         from './render/welcome.js';
 import { updateOverallProgress } from './render/header.js';
 import { restoreKey, saveKey,
          quickAction, explainCode } from './ai.js';
@@ -23,10 +22,10 @@ function boot() {
   // 2. Validate all loaded data files (warnings to console)
   validateSchema();
 
-  // 3. Render initial UI
+  // 3. Render initial UI — restore from hash or show welcome
   renderSidebar();
-  renderWelcome();
   updateOverallProgress();
+  initRouter();
 
   // 4. Restore AI key
   restoreKey();
@@ -34,16 +33,15 @@ function boot() {
   // 5. Wire all event listeners
   _wireEvents();
 
-  // 6. Open the first stage group in the sidebar by default
-  const firstGroup = document.querySelector('.stage-group');
-  if (firstGroup) firstGroup.classList.add('open');
-
   console.info('[PyHub] Boot complete');
 }
 
 // ── Event wiring ──────────────────────────────────────────
 
 function _wireEvents() {
+  // Logo → go home
+  document.getElementById('logo')?.addEventListener('click', goHome);
+
   // Track tabs
   document.querySelectorAll('.track-tab').forEach(btn => {
     btn.addEventListener('click', () => setTrack(btn.dataset.track));
@@ -83,11 +81,36 @@ function _wireEvents() {
   document.getElementById('ai-key-input')
     ?.addEventListener('input', e => saveKey(e.target.value));
 
-  // Keyboard: Escape closes AI panel
+  // Sidebar toggle (mobile)
+  const sidebar  = document.getElementById('sidebar');
+  const sbToggle = document.getElementById('sidebar-toggle');
+  const sbDrop   = document.getElementById('sidebar-backdrop');
+
+  sbToggle?.addEventListener('click', () => _toggleSidebar(sidebar, sbDrop));
+  sbDrop?.addEventListener('click',   () => _closeSidebar(sidebar, sbDrop));
+
+  // Close sidebar when a topic is selected on mobile
+  sidebar?.addEventListener('click', e => {
+    if (e.target.closest('.topic-item')) _closeSidebar(sidebar, sbDrop);
+  });
+
+  // Keyboard shortcuts
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && aiPanel?.classList.contains('open')) {
-      _closeAI(aiPanel);
+    // Don't capture when typing in inputs/textareas
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+    if (e.key === 'Escape') {
+      if (aiPanel?.classList.contains('open')) _closeAI(aiPanel);
+      if (sidebar?.classList.contains('open')) _closeSidebar(sidebar, sbDrop);
+      return;
     }
+    // Arrow left/right for prev/next topic
+    if (e.key === 'ArrowLeft')  { navTopic(-1); return; }
+    if (e.key === 'ArrowRight') { navTopic(1);  return; }
+    // 1-4 for mode switching
+    const modeKeys = { '1': 'reference', '2': 'study', '3': 'cheatsheet', '4': 'exercises' };
+    if (modeKeys[e.key]) { setMode(modeKeys[e.key]); return; }
   });
 }
 
@@ -99,6 +122,16 @@ function _toggleAI(panel) {
 function _closeAI(panel) {
   panel.classList.remove('open');
   panel.setAttribute('aria-hidden', 'true');
+}
+
+function _toggleSidebar(sidebar, backdrop) {
+  const isOpen = sidebar.classList.toggle('open');
+  backdrop.classList.toggle('show', isOpen);
+}
+
+function _closeSidebar(sidebar, backdrop) {
+  sidebar.classList.remove('open');
+  backdrop.classList.remove('show');
 }
 
 // ── Run ───────────────────────────────────────────────────

@@ -14,6 +14,8 @@
 <div id="header">
   <div id="logo">Py<span>Hub</span></div>
 
+  <button id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
+
   <div class="track-tabs" role="tablist" aria-label="Learning track">
     <button class="track-tab active" role="tab" aria-selected="true"
       data-track="python" id="tab-python">🐍 Python</button>
@@ -21,17 +23,6 @@
       data-track="cs" id="tab-cs">🧮 CS Fundamentals</button>
     <button class="track-tab" role="tab" aria-selected="false"
       data-track="ml" id="tab-ml">🤖 Machine Learning</button>
-  </div>
-
-  <div class="mode-tabs" role="tablist" aria-label="View mode">
-    <button class="mode-tab active" role="tab" aria-selected="true"
-      data-mode="reference">Reference</button>
-    <button class="mode-tab" role="tab" aria-selected="false"
-      data-mode="study">Study</button>
-    <button class="mode-tab" role="tab" aria-selected="false"
-      data-mode="cheatsheet">Cheatsheet</button>
-    <button class="mode-tab" role="tab" aria-selected="false"
-      data-mode="exercises">Exercises</button>
   </div>
 
   <div id="overall-progress" aria-label="Overall progress">
@@ -44,6 +35,9 @@
 
   <button id="ai-toggle" aria-label="Open AI Explainer panel">✦ AI Explainer</button>
 </div>
+
+<!-- SIDEBAR BACKDROP (mobile overlay) -->
+<div id="sidebar-backdrop"></div>
 
 <!-- BODY -->
 <div id="body">
@@ -64,6 +58,17 @@
             Mark Done
           </button>
         </div>
+      </div>
+
+      <div class="mode-tabs" role="tablist" aria-label="View mode">
+        <button class="mode-tab active" role="tab" aria-selected="true"
+          data-mode="reference">Reference</button>
+        <button class="mode-tab" role="tab" aria-selected="false"
+          data-mode="study">Study</button>
+        <button class="mode-tab" role="tab" aria-selected="false"
+          data-mode="cheatsheet">Cheatsheet</button>
+        <button class="mode-tab" role="tab" aria-selected="false"
+          data-mode="exercises">Exercises</button>
       </div>
 
       <div id="content-area"></div>

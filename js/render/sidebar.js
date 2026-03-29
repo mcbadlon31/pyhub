@@ -14,16 +14,23 @@ export function renderSidebar() {
   const stages = stagesForTrack(state.track);
   const progress = allProgress();
 
-  container.innerHTML = stages.map(stage => _stageHTML(stage, progress)).join('');
+  container.innerHTML = `<div class="sidebar-search">
+    <input type="text" id="sidebar-search-input" placeholder="Search topics…"
+           aria-label="Filter topics by name">
+  </div>` + stages.map(stage => _stageHTML(stage, progress)).join('');
+
   _bindStageClicks(container);
+  _bindSearch(container);
 }
 
-/** Targeted: update a single topic's checkmark. */
+/** Targeted: update a single topic's checkmark and done state. */
 export function updateTopicCheck(topicId, done) {
   const el = document.getElementById(`tc-${topicId}`);
   if (!el) return;
   el.className = `topic-check${done ? ' done' : ''}`;
   el.textContent = done ? '✓' : '';
+  const item = document.getElementById(`ti-${topicId}`);
+  if (item) item.classList.toggle('done', done);
 }
 
 /** Targeted: update a stage's progress bar and count label. */
@@ -79,7 +86,10 @@ function _stageHTML(stage, progress) {
                data-topic="${t.id}"
                aria-label="${t.name}${d ? ' (done)' : ''}">
       <div class="topic-check${d ? ' done' : ''}" id="tc-${t.id}">${d ? '✓' : ''}</div>
-      <span class="topic-name-sb">${t.name}</span>
+      <div class="topic-text-sb">
+        <span class="topic-name-sb">${t.name}</span>
+        <span class="topic-desc-sb">${t.desc}</span>
+      </div>
     </div>`;
   }).join('');
 
@@ -88,8 +98,8 @@ function _stageHTML(stage, progress) {
          role="button"
          tabindex="0"
          aria-expanded="${isOpen}"
-         data-stage-toggle="${stage.id}">
-      <div class="sg-dot" style="background:${col}"></div>
+         data-stage-toggle="${stage.id}"
+         style="border-left: 3px solid ${col}">
       <div class="sg-info">
         <div class="sg-title">${stage.num}. ${stage.title}</div>
         <div class="sg-prog" id="sglabel-${stage.id}">${done}/${total} done</div>
@@ -102,6 +112,29 @@ function _stageHTML(stage, progress) {
     </div>
     <div class="topic-list" role="list">${topicsHTML}</div>
   </div>`;
+}
+
+/** Bind search input to filter topics in the sidebar. */
+function _bindSearch(container) {
+  const input = document.getElementById('sidebar-search-input');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const q = input.value.toLowerCase().trim();
+    container.querySelectorAll('.topic-item').forEach(el => {
+      const name = el.querySelector('.topic-name-sb')?.textContent.toLowerCase() || '';
+      const desc = el.querySelector('.topic-desc-sb')?.textContent.toLowerCase() || '';
+      el.style.display = (!q || name.includes(q) || desc.includes(q)) ? '' : 'none';
+    });
+    // Open all stage groups when searching, restore when cleared
+    container.querySelectorAll('.stage-group').forEach(sg => {
+      if (q) {
+        sg.classList.add('open');
+      } else {
+        const hasActive = sg.querySelector('.topic-item.active');
+        sg.classList.toggle('open', !!hasActive);
+      }
+    });
+  });
 }
 
 function _bindStageClicks(container) {
