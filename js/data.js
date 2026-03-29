@@ -4,7 +4,7 @@
  * Aggregates all stage arrays (loaded as globals by <script> tags in index.html)
  * into a single searchable structure. Also validates the schema on boot.
  *
- * Data files expose globals: PY_S1, PY_S2 ... CS_S1 ... ML_S1 ... ML_S6
+ * Data files expose globals: PY_S1 ... PY_S6, CS_S1 ... CS_S2, ML_S1 ... ML_S6
  */
 
 /** All stages across all tracks, in display order. */
@@ -15,6 +15,7 @@ export const ALL_STAGES = [
   ...(window.PY_S3 ? [window.PY_S3] : []),
   ...(window.PY_S4 ? [window.PY_S4] : []),
   ...(window.PY_S5 ? [window.PY_S5] : []),
+  ...(window.PY_S6 ? [window.PY_S6] : []),
   // CS
   ...(window.CS_S1 ? [window.CS_S1] : []),
   ...(window.CS_S2 ? [window.CS_S2] : []),

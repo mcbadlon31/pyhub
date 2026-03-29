@@ -27,6 +27,8 @@ data/python/03-intermediate.js   → comprehensions, oop, modules, args-kwargs,
 data/python/04-ecosystem.js      → stdlib-scipy, venv-pip-jupyter, numpy, pandas,
                                     matplotlib, cli-tools
 data/python/05-advanced.js       → type-hints, async, testing, packaging, design-patterns
+data/python/06-qchem.js          → pyscf-basics, orca-io, xtb-screening, geom-analysis,
+                                    scf-concepts
 data/cs/01-data-structures.js    → arrays, linked-lists, stacks, queues, hash-tables,
                                     trees, graphs, heaps
 data/cs/02-algorithms.js         → big-o, sorting, binary-search, recursion,
@@ -55,7 +57,7 @@ datasets/perovskite_slab.extxyz         → 200 BaTiO3 surface configs (to be ge
 
 ## Stage ID Format — STRICT
 All stage IDs use prefixed kebab format: {track}-s{n}
-  Python: py-s1  py-s2  py-s3  py-s4  py-s5
+  Python: py-s1  py-s2  py-s3  py-s4  py-s5  py-s6
   CS:     cs-s1  cs-s2
   ML:     ml-s1  ml-s2  ml-s3  ml-s4  ml-s5  ml-s6
 
@@ -67,6 +69,7 @@ Current IDs in use (do not reuse):
   comprehensions, oop, modules, args-kwargs, lambda-map-filter, decorators, generators,
   stdlib-scipy, venv-pip-jupyter, numpy, pandas, matplotlib, cli-tools,
   type-hints, async, testing, packaging, design-patterns,
+  pyscf-basics, orca-io, xtb-screening, geom-analysis, scf-concepts,
   arrays, linked-lists, stacks, queues, hash-tables, trees, graphs, heaps,
   big-o, sorting, binary-search, recursion, dynamic-programming, graph-traversal, string-algorithms,
   lin-alg, stats-prob, calculus-gradients,
