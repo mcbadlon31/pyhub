@@ -227,6 +227,7 @@ kcal_lookup = {c["molecule"]: c["energy_ha"] * 627.509
       resources: [
         { icon: '📘', title: 'Python Docs — Classes', url: 'https://docs.python.org/3/tutorial/classes.html', tag: 'docs', tagColor: 'blue' },
         { icon: '📗', title: 'Real Python — OOP in Python', url: 'https://realpython.com/python3-object-oriented-programming/', tag: 'tutorial', tagColor: 'green' },
+        { icon: '🔬', title: 'Crawford Group: C++ Molecule Class', url: 'https://github.com/CrawfordGroup/ProgrammingProjects/tree/master/Project%2301', tag: 'project', tagColor: 'purple' },
       ]
     },
 

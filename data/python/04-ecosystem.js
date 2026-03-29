@@ -130,6 +130,7 @@ def extract_and_fit(orca_text):
       resources: [
         { icon: '📘', title: 'Python Standard Library', url: 'https://docs.python.org/3/library/', tag: 'docs', tagColor: 'blue' },
         { icon: '📗', title: 'SciPy Documentation', url: 'https://docs.scipy.org/doc/scipy/', tag: 'docs', tagColor: 'blue' },
+        { icon: '📓', title: 'SciComp for Chemists: Signal Processing', url: 'https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html', tag: 'textbook', tagColor: 'green' },
       ]
     },
 
@@ -370,6 +371,7 @@ print(distance_matrix(h2o))  # 3x3 symmetric matrix`
       resources: [
         { icon: '📘', title: 'NumPy Documentation', url: 'https://numpy.org/doc/stable/', tag: 'docs', tagColor: 'blue' },
         { icon: '📗', title: 'NumPy Quickstart Tutorial', url: 'https://numpy.org/doc/stable/user/quickstart.html', tag: 'tutorial', tagColor: 'green' },
+        { icon: '📓', title: 'SciComp for Chemists: NumPy', url: 'https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html', tag: 'textbook', tagColor: 'green' },
       ]
     },
 
@@ -486,6 +488,7 @@ print(result)`
       resources: [
         { icon: '📘', title: 'Pandas Documentation', url: 'https://pandas.pydata.org/docs/', tag: 'docs', tagColor: 'blue' },
         { icon: '📗', title: '10 Minutes to Pandas', url: 'https://pandas.pydata.org/docs/user_guide/10min.html', tag: 'tutorial', tagColor: 'green' },
+        { icon: '📓', title: 'SciComp for Chemists: Pandas', url: 'https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html', tag: 'textbook', tagColor: 'green' },
       ]
     },
 
@@ -604,6 +607,7 @@ fig.savefig("method_comparison.png", dpi=300)`
       resources: [
         { icon: '📘', title: 'Matplotlib Documentation', url: 'https://matplotlib.org/stable/contents.html', tag: 'docs', tagColor: 'blue' },
         { icon: '📗', title: 'Matplotlib Cheat Sheets', url: 'https://matplotlib.org/cheatsheets/', tag: 'reference', tagColor: 'purple' },
+        { icon: '📓', title: 'SciComp for Chemists: Visualization', url: 'https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html', tag: 'textbook', tagColor: 'green' },
       ]
     },
 

@@ -135,6 +135,7 @@ for i, (freq, mode) in enumerate(zip(sorted_freqs, sorted_modes.T)):
       resources: [
         { icon: '📘', title: 'NumPy Linear Algebra', url: 'https://numpy.org/doc/stable/reference/routines.linalg.html', tag: 'docs', tagColor: 'blue' },
         { icon: '📗', title: '3Blue1Brown — Essence of Linear Algebra', url: 'https://www.3blue1brown.com/topics/linear-algebra', tag: 'video', tagColor: 'red' },
+        { icon: '🔬', title: 'CompChem101 Math Foundations', url: 'https://github.com/gomesgroup/compchem101#essential-skills-for-machine-learning-bonus', tag: 'guide', tagColor: 'green' },
       ]
     },
 

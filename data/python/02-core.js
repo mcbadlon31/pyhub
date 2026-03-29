@@ -678,6 +678,11 @@ for key, val in result.items():
           url:  'https://www.w3schools.com/python/python_file_handling.asp',
           tag: 'quick ref', tagColor: 'orange',
         },
+        {
+          icon: '🔬', title: 'Crawford Group: Molecular Geometry from Files',
+          url:  'https://github.com/CrawfordGroup/ProgrammingProjects/tree/master/Project%2301',
+          tag: 'project', tagColor: 'purple',
+        },
       ],
     },
 

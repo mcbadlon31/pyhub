@@ -140,6 +140,7 @@ for smi in smiles_list:
         { icon: '📘', title: 'RDKit Getting Started', url: 'https://www.rdkit.org/docs/GettingStartedInPython.html', tag: 'docs', tagColor: 'blue' },
         { icon: '🎓', title: 'RDKit Descriptor Tutorial', url: 'https://www.rdkit.org/docs/GettingStartedInPython.html#list-of-available-descriptors', tag: 'tutorial', tagColor: 'green' },
         { icon: '📄', title: 'Morgan Fingerprints Explained', url: 'https://www.rdkit.org/docs/GettingStartedInPython.html#morgan-fingerprints-circular-fingerprints', tag: 'docs', tagColor: 'blue' },
+        { icon: '📓', title: 'SciComp for Chemists: Cheminformatics', url: 'https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html', tag: 'textbook', tagColor: 'green' },
       ]
     },
 
@@ -164,6 +165,14 @@ for smi in smiles_list:
         number, degree, formal charge, aromaticity; edge features include bond
         type and stereochemistry. Graph neural networks operate directly on these
         graphs, learning representations without hand-crafted descriptors.</p>
+
+        <p>For atomistic/materials ML, <strong>structural descriptors</strong>
+        encode 3D geometry: the <strong>Coulomb matrix</strong> captures nuclear
+        charges and distances, <strong>SOAP</strong> (Smooth Overlap of Atomic
+        Positions) encodes local atomic environments via spherical harmonics,
+        and <strong>many-body tensor representations</strong> extend to higher
+        order correlations. These bridge the gap between molecular fingerprints
+        (topology only) and full 3D graph representations.</p>
 
         <p>The choice matters: fingerprints work well for small datasets (&lt;10k)
         and are fast to compute. Graph representations shine with larger datasets
@@ -219,6 +228,8 @@ for smi in smiles_list:
         { syn: 'mol.GetBondBetweenAtoms(i, j)', desc: 'Get bond object between two atom indices' },
         { syn: 'MurckoScaffold.MurckoScaffoldSmiles(mol)', desc: 'Extract Murcko scaffold for scaffold splitting' },
         { syn: 'DataStructs.TanimotoSimilarity(fp1, fp2)', desc: 'Tanimoto similarity between two fingerprints' },
+        { syn: 'SOAP(species, r_cut, n_max, l_max)', desc: 'DScribe SOAP descriptor — encodes local atomic environments' },
+        { syn: 'CoulombMatrix(n_atoms_max)', desc: 'DScribe Coulomb matrix — nuclear charges × distances' },
       ],
 
       exercises: [
@@ -286,6 +297,8 @@ print(f"Nodes: {g['node_features'].shape}, Edges: {g['edge_index'].shape}")`
         { icon: '📘', title: 'RDKit Fingerprint Docs', url: 'https://www.rdkit.org/docs/GettingStartedInPython.html#fingerprinting-and-molecular-similarity', tag: 'docs', tagColor: 'blue' },
         { icon: '📄', title: 'Molecular Representations for ML (Review)', url: 'https://pubs.acs.org/doi/10.1021/acs.chemrev.1c00107', tag: 'paper', tagColor: 'purple' },
         { icon: '🎓', title: 'DeepChem Featurizers', url: 'https://deepchem.readthedocs.io/en/latest/api_reference/featurizers.html', tag: 'docs', tagColor: 'blue' },
+        { icon: '🔬', title: 'DScribe: SOAP & Coulomb Matrix', url: 'https://singroup.github.io/dscribe/latest/', tag: 'library', tagColor: 'orange' },
+        { icon: '📄', title: 'CompChem101 ML Representations Guide', url: 'https://github.com/gomesgroup/compchem101#essential-skills-for-machine-learning-bonus', tag: 'guide', tagColor: 'green' },
       ]
     },
 

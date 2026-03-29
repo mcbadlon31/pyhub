@@ -133,6 +133,7 @@ print(f"Ridge MAE: {mean_absolute_error(y_test, ridge.predict(X_test)):.2f}%")`
         { icon: '📘', title: 'scikit-learn Linear Models Guide', url: 'https://scikit-learn.org/stable/modules/linear_model.html', tag: 'docs', tagColor: 'blue' },
         { icon: '🎓', title: 'StatQuest: Linear Regression', url: 'https://www.youtube.com/watch?v=PaFPbb66DxQ', tag: 'video', tagColor: 'red' },
         { icon: '📄', title: 'Ridge vs Lasso Explained', url: 'https://scikit-learn.org/stable/auto_examples/linear_model/plot_ridge_path.html', tag: 'tutorial', tagColor: 'green' },
+        { icon: '📓', title: 'SciComp for Chemists: ML', url: 'https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html', tag: 'textbook', tagColor: 'green' },
       ]
     },
 

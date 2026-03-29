@@ -141,6 +141,8 @@ print(f"ΔE = {e_after - e_before:.4f} eV")`
         { icon: '📘', title: 'ASE Documentation', url: 'https://wiki.fysik.dtu.dk/ase/', tag: 'docs', tagColor: 'blue' },
         { icon: '🎓', title: 'ASE Tutorial: Getting Started', url: 'https://wiki.fysik.dtu.dk/ase/tutorials/tutorials.html', tag: 'tutorial', tagColor: 'green' },
         { icon: '📄', title: 'ASE Calculators', url: 'https://wiki.fysik.dtu.dk/ase/ase/calculators/calculators.html', tag: 'docs', tagColor: 'blue' },
+        { icon: '🔬', title: 'Liu Group: Simulation Basics', url: 'https://liu-group.github.io/simulation-basics/', tag: 'tutorial', tagColor: 'green' },
+        { icon: '🔬', title: 'CompChem101 Software Guide', url: 'https://github.com/gomesgroup/compchem101', tag: 'guide', tagColor: 'orange' },
       ]
     },
 
@@ -411,6 +413,7 @@ print(f"Edges: {graph.num_edges}, RBF shape: {rbf.shape}")`
         { icon: '📘', title: 'Geometric GNN Survey', url: 'https://arxiv.org/abs/2104.13478', tag: 'paper', tagColor: 'purple' },
         { icon: '📄', title: 'SchNet Paper', url: 'https://arxiv.org/abs/1706.08566', tag: 'paper', tagColor: 'purple' },
         { icon: '🎓', title: 'PyG 3D Point Cloud Tutorial', url: 'https://pytorch-geometric.readthedocs.io/en/latest/tutorial/point_cloud.html', tag: 'tutorial', tagColor: 'green' },
+        { icon: '🔬', title: 'Crawford Group: HF-SCF Implementation', url: 'https://github.com/CrawfordGroup/ProgrammingProjects/tree/master/Project%2303', tag: 'project', tagColor: 'purple' },
       ]
     },
 
